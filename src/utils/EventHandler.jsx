@@ -26,7 +26,6 @@ function addEvent(eventTitle, eventDescription, eventType, eventDate) {
 function deleteEvent(eventId) {
     const newEvents = loadEvents().filter(event => event.id !== eventId);
     updateLocalStorage('events', newEvents);
-    setEvents(newEvents);
 }
 
 function updateEvent(eventId, newEventTitle, newEventDescription, newEventType, newEventDate) {
