@@ -26,6 +26,7 @@ export function RightBar() {
         setEventDescription('');
         setEventType('');
         setEventDate('');
+        window.location.reload();
     }
     return (
         <>
