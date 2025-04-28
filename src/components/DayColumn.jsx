@@ -17,7 +17,7 @@ export function DayColumn({ date }) {
                 <p className="text-gray-500">No events</p>
             ) : (
                 events.map((event) => (
-                <ShowEvent eventId={event}/>
+                <ShowEvent key={event} eventId={event}/>
                 ))
             )}
         </div>

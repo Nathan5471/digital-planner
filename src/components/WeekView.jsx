@@ -16,7 +16,7 @@ export function WeekView() {
             </div>
             <div className="min-h- grid grid-cols-7 gap-1">
                 {days.map((day) => (
-                    <DayColumn date={day} />
+                    <DayColumn key={format(day, "yyyy-MM-dd")} date={day} />
                 ))}
             </div>
         </div>
