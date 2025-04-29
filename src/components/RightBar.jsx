@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { addEvent } from '../utils/EventHandler';
 
-export function RightBar() {
+export function RightBar({ triggerRefresh }) {
     const [eventTitle, setEventTitle] = useState('');
     const [eventDescription, setEventDescription] = useState('');
     const [eventType, setEventType] = useState('');
@@ -26,7 +26,7 @@ export function RightBar() {
         setEventDescription('');
         setEventType('');
         setEventDate('');
-        window.location.reload();
+        triggerRefresh();
     }
     return (
         <>

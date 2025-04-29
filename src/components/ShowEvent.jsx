@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { loadEvent, deleteEvent } from '../utils/EventHandler.jsx'
 import deleteImage from '../assets/delete.svg';
 
-export function ShowEvent({ eventId }) {
+export function ShowEvent({ eventId, triggerRefresh}) {
     const event = loadEvent(eventId);
     const eventTitle = event.title;
     const eventType = event.type;
 
     const deleteSelf = () => {
         deleteEvent(eventId);
-        window.location.reload();
+        triggerRefresh();
     }
 
     return (

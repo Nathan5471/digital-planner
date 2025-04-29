@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { startOfWeek, addDays, format } from 'date-fns';
 import { DayColumn } from './DayColumn.jsx';
 
-export function WeekView() {
+export function WeekView(refresh) {
     const [currentDate, setCurrentDate] = useState(new Date());
     const startOfWeekDate = startOfWeek(currentDate, { weekStartsOn: 0 }); // Sunday as the first day of the week
     const days = Array.from({ length: 7 }, (_, index) => addDays(startOfWeekDate, index));

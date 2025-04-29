@@ -1,10 +1,15 @@
-
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
 import { ShowEvent } from './ShowEvent.jsx';
 import { getEventIdsByDate } from '../utils/EventHandler.jsx';
 
 export function DayColumn({ date }) {
+    const [refreshToggle, setRefreshToggle] = useState(false);
+
+    const triggerRefresh = useCallback(() => {
+        setRefreshToggle((prev) => !prev);
+    }, []);
+
     const events = getEventIdsByDate(format(date, 'yyyy-MM-dd'));;
     if (events.length > 4) {
         events.length = 4; // Limit to 4 events for display
@@ -17,7 +22,7 @@ export function DayColumn({ date }) {
                 <p className="text-gray-500">No events</p>
             ) : (
                 events.map((event) => (
-                <ShowEvent key={event} eventId={event}/>
+                <ShowEvent key={event} eventId={event} triggerRefresh={triggerRefresh}/>
                 ))
             )}
         </div>
