@@ -34,7 +34,14 @@ export function RightBar({ triggerRefresh }) {
                 <h2 className="text-lg font-bold mb-4">Add Event</h2>
                 <input type="text" placeholder="Event Title" value={eventTitle} onChange={(e) => updateEventTitle(e.target.value)} className="border p-2 mb-2 w-full" required />
                 <input type="text" placeholder="Event Description" value={eventDescription} onChange={(e) => updateEventDescription(e.target.value)} className="border p-2 mb-2 w-full" required />
-                <input type="text" placeholder="Event Type" value={eventType} onChange={(e) => updateEventType(e.target.value)} className="border p-2 mb-2 w-full" required />
+                <select value={eventType} onChange={(e) => updateEventType(e.target.value)} className="border p-2 mb-2 w-full" required>
+                    <option value="">Select Event Type</option>
+                    <option value="Homework">Homework</option>
+                    <option value="Project">Project</option>
+                    <option value="Quiz">Quiz</option>
+                    <option value="Test">Test</option>
+                    <option value="No School">No School</option>
+                </select>
                 <input type="date" placeholder="Event Date" value={eventDate} onChange={(e) => updateEventDate(e.target.value)} className="border p-2 mb-2 w-full" required />
                 <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Event</button>
             </form>
