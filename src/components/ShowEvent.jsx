@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { loadEvent, deleteEvent } from '../utils/EventHandler.jsx'
+import { EditPopup } from './EditPopup.jsx';
 import deleteImage from '../assets/delete.svg';
 import editImage from '../assets/edit.svg';
+import { useOverlayContext } from '../contexts/OverlayContext.jsx'
+
 
 export function ShowEvent({ eventId, triggerRefresh}) {
     const event = loadEvent(eventId);
@@ -14,6 +17,7 @@ export function ShowEvent({ eventId, triggerRefresh}) {
         'Test': 'bg-red-100 text-red-800',
         'No School': 'bg-gray-100 text-gray-800'
     }
+    const { openOverlay } = useOverlayContext();
 
     const deleteSelf = () => {
         deleteEvent(eventId);
@@ -21,11 +25,12 @@ export function ShowEvent({ eventId, triggerRefresh}) {
     }
 
     const editSelf = () => {
-        // Implement edit functionality here
+        console.log("Editing event with ID:", eventId);
+        openOverlay(<EditPopup eventId={eventId} triggerRefresh={triggerRefresh}/>);
     }
 
     return (
-        <div className="border p-4 rounded-lg shadow-md bg-white">
+        <div className="border p-3 rounded-lg shadow-md bg-white">
             <div className="flex justify-between items-center mb-2">
                 <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
                 

@@ -42,7 +42,6 @@ function updateEvent(eventId, newEventTitle, newEventDescription, newEventType, 
         return event;
     });
     updateLocalStorage('events', newEvents);
-    setEvents(newEvents);
 }
 
 function getEventIdsByDate(date) {
