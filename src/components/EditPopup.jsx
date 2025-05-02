@@ -35,9 +35,12 @@ export function EditPopup({ eventId, triggerRefresh }) {
                     <option value="No School">No School</option>
                 </select>
                 <input type="date" placeholder="Event Date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} className="border p-2 mb-2 w-full" required />
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">Update Event</button>
+                <div className="flex justify-between mb-2">
+                    <button type="submit" className="bg-blue-500 text-white p-2 rounded">Update Event</button>
+                    <button type="button" className="bg-red-500 text-white p-2 rounded" onClick={closeOverlay}>Cancel</button>
+                </div>
             </form>
-            <button onClick={closeOverlay} className="mt-4 text-red-500">Cancel</button>
+
         </>
     )
         
