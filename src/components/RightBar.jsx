@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx'
 import { AddEvent } from './AddEvent.jsx';
 
-export function RightBar({ triggerRefresh }) {
+export function RightBar() {
     const { openOverlay } = useOverlayContext();
 
     const addEventFunction = () => {
-        openOverlay(<AddEvent triggerRefresh={triggerRefresh} />);
+        openOverlay(<AddEvent/>);
     }
 
     return (

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 import { addEvent } from '../utils/EventHandler.jsx';
 
-export function AddEvent({ triggerRefresh }) {
+export function AddEvent() {
     const [eventTitle, setEventTitle] = useState('');
     const [eventDescription, setEventDescription] = useState('');
     const [eventType, setEventType] = useState('');
     const [eventDate, setEventDate] = useState('');
 
+    const { triggerRefresh } = useRefreshContext();
     const { closeOverlay } = useOverlayContext();
 
     const addEventFunction = () => {

@@ -1,12 +1,14 @@
 import React from 'react';
-import { loadEvent, deleteEvent } from '../utils/EventHandler.jsx'
+import { loadEvent, deleteEvent } from '../utils/EventHandler.jsx';
+import { useRefreshContext } from '../contexts/RefreshContext.jsx';
+import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 import { EditPopup } from './EditPopup.jsx';
 import deleteImage from '../assets/delete.svg';
 import editImage from '../assets/edit.svg';
-import { useOverlayContext } from '../contexts/OverlayContext.jsx'
 
 
-export function ShowEvent({ eventId, triggerRefresh}) {
+
+export function ShowEvent({ eventId}) {
     const event = loadEvent(eventId);
     const eventTitle = event.title;
     const eventType = event.type;
@@ -17,6 +19,7 @@ export function ShowEvent({ eventId, triggerRefresh}) {
         'Test': 'bg-red-100 text-red-800',
         'No School': 'bg-gray-100 text-gray-800'
     }
+    const { triggerRefresh} = useRefreshContext();
     const { openOverlay } = useOverlayContext();
 
     const deleteSelf = () => {
