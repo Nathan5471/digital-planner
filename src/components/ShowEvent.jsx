@@ -8,7 +8,7 @@ import editImage from '../assets/edit.svg';
 
 
 
-export function ShowEvent({ eventId}) {
+export function ShowEvent({ eventId, isToday}) {
     const event = loadEvent(eventId);
     const eventTitle = event.title;
     const eventType = event.type;
@@ -33,7 +33,7 @@ export function ShowEvent({ eventId}) {
     }
 
     return (
-        <div className="border p-3 rounded-lg shadow-md bg-white">
+        <div className={`border p-3 rounded-lg shadow-md ${isToday ? "bg-blue-100" : "bg-white"}`}>
             <div className="flex justify-between items-center mb-2">
                 <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
                 
