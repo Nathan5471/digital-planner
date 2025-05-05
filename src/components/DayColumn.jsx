@@ -9,6 +9,7 @@ export function DayColumn({ date }) {
     const refresh = refreshToggle;
     const today = new Date();
     const isToday = format(date, "yyyy-MM-dd") === format(today, "yyyy-MM-dd");
+    const isPast = date < today;
 
     const events = getEventIdsByDate(format(date, 'yyyy-MM-dd'));;
     if (events.length > 4) {
@@ -22,7 +23,7 @@ export function DayColumn({ date }) {
                 <p className="text-gray-500">No events</p>
             ) : (
                 events.map((event) => (
-                <ShowEvent key={event} eventId={event} isToday={isToday}/>
+                <ShowEvent key={event} eventId={event} isToday={isToday} isPast={isPast}/>
                 ))
             )}
         </div>
