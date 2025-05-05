@@ -3,6 +3,7 @@ import { loadEvent, deleteEvent } from '../utils/EventHandler.jsx';
 import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 import { EditPopup } from './EditPopup.jsx';
+import { ShowEventFull } from './ShowEventFull.jsx';
 import deleteImage from '../assets/delete.svg';
 import editImage from '../assets/edit.svg';
 
@@ -10,7 +11,10 @@ import editImage from '../assets/edit.svg';
 
 export function ShowEvent({ eventId, isToday, isPast }) {
     const event = loadEvent(eventId);
-    const eventTitle = event.title;
+    let eventTitle = event.title;
+    if (eventTitle.length > 8) {
+        eventTitle = eventTitle.substring(0, 8) + "...";
+    }
     const eventType = event.type;
     const colors = {
         'Homework': 'bg-blue-100 text-blue-800',
@@ -28,19 +32,24 @@ export function ShowEvent({ eventId, isToday, isPast }) {
     }
 
     const editSelf = () => {
-        console.log("Editing event with ID:", eventId);
         openOverlay(<EditPopup eventId={eventId} triggerRefresh={triggerRefresh}/>);
     }
-
+    
+    const showSelf = () => {
+        openOverlay(<ShowEventFull eventId={eventId}/>);
+    }
     return (
         <div className={`border p-3 rounded-lg shadow-md ${isToday ? "bg-blue-100" : "bg-white"} ${isPast ? "line-through" : ""}`}>
-            <div className="flex justify-between items-center mb-2">
-                <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
-                
-            </div>
-            <div className={`border p-1 rounded-sm shadow-sm ${colors[eventType]}`}>
-                <p className="text-xs">{eventType}</p>
-            </div>
+            <button onClick={showSelf}>
+                <div className="flex justify-between items-center mb-2">
+
+                    <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
+                    
+                </div>
+                <div className={`border p-1 rounded-sm shadow-sm ${colors[eventType]}`}>
+                    <p className="text-xs">{eventType}</p>
+                </div>
+            </button>    
             <div className="flex p-1 justify-end">
                 <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={editSelf}>
                     <img src={editImage} width="20" height="20" alt="Edit Button"/>

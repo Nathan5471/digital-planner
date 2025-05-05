@@ -14,7 +14,7 @@ export function WeekView() {
                 <h2 className="text-lg font-bold mb-4">{format(startOfWeekDate, 'EEEE')} {format(startOfWeekDate, 'MM/dd/yyyy')} - {format(days[6], 'EEEE')} {format(days[6], 'MM/dd/yyyy')}</h2>
                 <button className="bg-blue-500 text-white p-2 rounded" onClick={() => setCurrentDate(addDays(currentDate, 7))}>Next Week</button>
             </div>
-            <div className="min-h- grid grid-cols-7 gap-1">
+            <div className="min-h-[calc(90%)] grid grid-cols-7 gap-1">
                 {days.map((day) => (
                     <DayColumn key={format(day, "yyyy-MM-dd")} date={day} />
                 ))}
