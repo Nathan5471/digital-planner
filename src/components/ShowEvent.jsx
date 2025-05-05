@@ -40,17 +40,18 @@ export function ShowEvent({ eventId, isToday, isPast }) {
     }
     return (
         <div className={`border p-3 rounded-lg shadow-md ${isToday ? "bg-blue-100" : "bg-white"} ${isPast ? "line-through" : ""}`}>
-            <button onClick={showSelf}>
-                <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between items-center mb-2">
 
-                    <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
-                    
-                </div>
-                <div className={`border p-1 rounded-sm shadow-sm ${colors[eventType]}`}>
-                    <p className="text-xs">{eventType}</p>
-                </div>
-            </button>    
+                <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
+                
+            </div>
+            <div className={`border p-1 rounded-sm shadow-sm ${colors[eventType]}`}>
+                <p className="text-xs">{eventType}</p>
+            </div>   
             <div className="flex p-1 justify-end">
+                <button className="text-xs border rounded-sm shadow-sm transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none mr-2" onClick={showSelf}>
+                    Details
+                </button>
                 <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={editSelf}>
                     <img src={editImage} width="20" height="20" alt="Edit Button"/>
                 </button>

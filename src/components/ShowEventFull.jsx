@@ -1,4 +1,5 @@
 import React from 'react';
+import { parseISO, format } from 'date-fns';
 import { loadEvent } from '../utils/EventHandler.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 
@@ -20,17 +21,19 @@ export function ShowEventFull({ eventId }) {
 
     return (
         <div className="flex flex-col">
-            <h4 className="text-2xl font-semibold">{eventTitle}</h4>
+            <h4 className="text-2xl font-semibold mb-2">{eventTitle}</h4>
+            <div className="flex justify-between items-center mb-2 text-sm">
+                <div className={`flex p-1 border rounded-sm ${colors[eventType]}`}>
+                    <p>{eventType}</p>
+                </div>
+                <p>{format(parseISO(eventDate), 'MMMM dd, yyyy')}</p>
+            </div>
             <hr />
             <div className="text-lg">
                 <p className="font-bold">Description:</p>
                 <p>{eventDescription}</p>
-            </div>
-            <div className={`p-1 border rounded-sm max-w-[calc(13%)] ${colors[eventType]}`}>
-                <p className={"text-pretty"}>{eventType}</p>
-            </div>
-            <p className="text-pretty">{eventDate}</p>
-            <button className="bg-red-500 text-white p-2 rounded mt-4" onClick={closeOverlay}>Close</button>
+            </div>   
+            <button className="bg-blue-500 text-white p-2 rounded mt-4" onClick={closeOverlay}>Close</button>
         </div>
     );
 }
