@@ -11,6 +11,17 @@ function loadEvents() {
 }
 
 
+function sortEventsByDate(events) {
+    const sortedEvents = events.sort((a, b) => {
+        const dateA = parseISO(a.date);
+        const dateB = parseISO(b.date);
+        return dateA - dateB;
+    });
+    console.log("Sorted Events:", sortedEvents);
+    return sortedEvents;
+}
+
+
 function addEvent(eventTitle, eventDescription, eventType, eventDate) {
     const eventId = new Date()
     const event = {
@@ -51,7 +62,9 @@ function getEventIdsByDate(date) {
 }
 
 function getEventIdsByType(eventType, date) {
-    const eventIds = loadEvents().filter(event => event.type === eventType && parseISO(event.date) > parseISO(date)).map(event => event.id);
+    const events = loadEvents().filter(event => event.type === eventType && parseISO(event.date) >= parseISO(date));
+    const sortedEvents = sortEventsByDate(events);
+    const eventIds = sortedEvents.map(event => event.id);
     return eventIds;
 }
 

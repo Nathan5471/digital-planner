@@ -14,7 +14,12 @@ export function UpcomingProjects() {
     }
 
     if (tests.length === 0) {
-        return null;
+        return (
+            <div className="border p-4 rounded-lg shadow-md bg-white">
+                <h3 className="text-pretty font-bold items-center">Upcoming Projects</h3>
+                <p className="text-gray-500">No upcoming projects</p>
+            </div>
+        );
     }
 
     return (
