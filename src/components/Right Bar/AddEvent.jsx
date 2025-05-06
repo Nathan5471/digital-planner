@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useRefreshContext } from '../contexts/RefreshContext.jsx';
-import { useOverlayContext } from '../contexts/OverlayContext.jsx';
-import { addEvent } from '../utils/EventHandler.jsx';
+import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
+import { useOverlayContext } from '../../contexts/OverlayContext.jsx';
+import { addEvent } from '../../utils/EventHandler.jsx';
 
 export function AddEvent() {
     const [eventTitle, setEventTitle] = useState('');

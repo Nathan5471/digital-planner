@@ -1,4 +1,5 @@
 import { updateLocalStorage, getLocalStorage } from './LocalStorage.jsx';
+import { parseISO} from 'date-fns';
 
 function loadEvents() {
     const loadedEvents = getLocalStorage('events');
@@ -49,6 +50,11 @@ function getEventIdsByDate(date) {
     return eventIds;
 }
 
+function getEventIdsByType(eventType, date) {
+    const eventIds = loadEvents().filter(event => event.type === eventType && parseISO(event.date) > parseISO(date)).map(event => event.id);
+    return eventIds;
+}
+
 function loadEvent(eventId) {
     const event = loadEvents().find(event => event.id === eventId);
     if (event) {
@@ -58,4 +64,4 @@ function loadEvent(eventId) {
     }
 }
 
-export { addEvent, deleteEvent, updateEvent, getEventIdsByDate, loadEvent };
+export {addEvent, deleteEvent, updateEvent, getEventIdsByDate, getEventIdsByType, loadEvent };
