@@ -33,7 +33,7 @@ export function ShowEventFull({ eventId }) {
                 <p className="font-bold">Description:</p>
                 <p>{eventDescription}</p>
             </div>   
-            <button className="bg-blue-500 text-white p-2 rounded mt-4" onClick={closeOverlay}>Close</button>
+            <button className="bg-blue-500 text-white p-2 rounded mt-4 transform transition duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none" onClick={closeOverlay}>Close</button>
         </div>
     );
 }

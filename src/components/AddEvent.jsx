@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
-import { useOverlayContext } from '../../contexts/OverlayContext.jsx';
-import { addEvent } from '../../utils/EventHandler.jsx';
+import { useRefreshContext } from '../contexts/RefreshContext.jsx';
+import { useOverlayContext } from '../contexts/OverlayContext.jsx';
+import { addEvent } from '../utils/EventHandler.jsx';
 
 export function AddEvent() {
     const [eventTitle, setEventTitle] = useState('');
@@ -36,8 +36,8 @@ export function AddEvent() {
             </select>
             <input type="date" placeholder="Event Date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} className="border p-2 mb-2 w-full" required />
             <div className="flex justify-between mb-2">
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Event</button>
-                <button type="button" className="bg-red-500 text-white p-2 rounded" onClick={closeOverlay}>Cancel</button>
+                <button type="submit" className="bg-blue-500 text-white p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none">Add Event</button>
+                <button type="button" className="bg-red-500 text-white p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-red-600 focus:outline-none" onClick={closeOverlay}>Cancel</button>
             </div>
         </form>
     )
