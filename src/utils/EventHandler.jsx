@@ -12,7 +12,7 @@ function loadEvents() {
 
 
 function addEvent(eventTitle, eventDescription, eventType, eventDate) {
-    const eventId = loadEvents().length + 1; // Simple ID generation
+    const eventId = new Date()
     const event = {
         id: eventId,
         title: eventTitle,

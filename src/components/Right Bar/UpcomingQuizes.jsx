@@ -1,9 +1,13 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { getEventIdsByType } from '../../utils/EventHandler.jsx';
+import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
 import { ShowEventSmall } from './ShowEventSmall.jsx';
 
 export function UpcomingQuizes() {
+    const { refreshToggle } = useRefreshContext();
+    const refresh = refreshToggle
+    
     const tests = getEventIdsByType("Quiz", format(new Date(), 'yyyy-MM-dd'));
     if (tests.length > 4) {
         tests.length = 4;
