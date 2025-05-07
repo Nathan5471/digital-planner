@@ -17,7 +17,6 @@ function sortEventsByDate(events) {
         const dateB = parseISO(b.date);
         return dateA - dateB;
     });
-    console.log("Sorted Events:", sortedEvents);
     return sortedEvents;
 }
 
