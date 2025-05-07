@@ -24,7 +24,7 @@ export function DayColumn({ date }) {
         openOverlay(<DayEventPopup date={date}/>)
     }
     return (
-        <div className={`border p-4 rounded-lg shadow-md w-36 h-97 ${isToday ? "bg-blue-200" : "bg-white"}`}>
+        <div className={`border p-4 rounded-lg shadow-md w-36 h-99 ${isToday ? "bg-blue-200" : "bg-white"}`}>
             <h3 className="text-xs font-bold items-center mb-1">{format(date, 'EEEE')} {format(date, 'MM/dd')}</h3>
             {events === null || events.length === 0 ? (
                 <p className="text-gray-500">No events</p>
