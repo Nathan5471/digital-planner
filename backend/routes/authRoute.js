@@ -28,7 +28,11 @@ router.post('/', async (req, res) => {
 });
 
 router.delete('/', async (req, res) => {
+    const { username, password } = req.body;
     try {
+        if (!username || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
         deleteUser(req, res);
     }  catch (error) {
         res.status(500).json({ message: 'Server error' });

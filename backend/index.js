@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoute from './routes/authRoute.js';
+import eventRoute from './routes/eventRoute.js';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use('/api/auth', authRoute);
+app.use('/api/events', eventRoute);
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log('MongoDB connected');

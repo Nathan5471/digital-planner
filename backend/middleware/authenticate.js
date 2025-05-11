@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/userModel.js';
+import { User } from '../models/user.js';
 
 export default function authenticate(req, res, next) {
     const token = req.headers['authorization']?.split(' ')[1];
@@ -14,7 +14,7 @@ export default function authenticate(req, res, next) {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        req.user = user;
+        req.userId = decoded.id;
         next();
     } catch (error) {
         return res.status(401).json({ message: 'Invalid or expired token' });
