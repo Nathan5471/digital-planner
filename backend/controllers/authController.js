@@ -27,8 +27,12 @@ export const registerUser = async (req, res) => {
         await newUser.save();
 
         const token = generateToken(newUser._id);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'Strict',
+        })
         res.status(201).json({
-            token,
             user: {
                 _id: newUser._id,
                 username: newUser.username,
@@ -56,8 +60,12 @@ export const loginUser = async (req, res) => {
         }
 
         const token = generateToken(user._id);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'Strict',
+        })
         res.status(200).json({
-            token,
             user: {
                 _id: user._id,
                 username: user.username,

@@ -2,13 +2,9 @@ import axios from 'axios';
 
 const baseURL = 'https://localhost:5000/api/events';
 
-const addEvent = async (accessToken, eventData) => {
+const addEvent = async (eventData) => {
     try {
-        const response = await axios.post(`${baseURL}`, eventData, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
+        const response = await axios.post(`${baseURL}`, eventData, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error('Error adding event:', error);
@@ -16,13 +12,9 @@ const addEvent = async (accessToken, eventData) => {
     }
 }
 
-const updateEvent = async (accessToken, eventData) => {
+const updateEvent = async (eventData) => {
     try {
-        const response = await axios.put(`${baseURL}`, eventData, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
+        const response = await axios.put(`${baseURL}`, eventData, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error('Error updating event:', error);
@@ -30,13 +22,9 @@ const updateEvent = async (accessToken, eventData) => {
     }
 }
 
-const deleteEvent = async (accessToken, eventId) => {
+const deleteEvent = async (eventId) => {
     try {
-        const response = await axios.delete(`${baseURL}`, eventId, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
+        const response = await axios.delete(`${baseURL}`, eventId, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error('Error deleting event:', error);
@@ -44,13 +32,11 @@ const deleteEvent = async (accessToken, eventId) => {
     }
 }
 
-const getEventIdsByDate = async (accessToken, date) => {
+const getEventIdsByDate = async (date) => {
     try {
         const response = await axios.get(`${baseURL}/idsByDate`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-            params: { date },
+            withCredentials: true,
+            params: { date }
         });
         return response.data;
     } catch (error) {
@@ -59,12 +45,10 @@ const getEventIdsByDate = async (accessToken, date) => {
     }
 }
 
-const getEventIdsByType = async (accessToken, type, date) => {
+const getEventIdsByType = async (type, date) => {
     try {
         const response = await axios.get(`${baseURL}/idsByType`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
+            withCredentials: true,
             params: { type, date },
         });
         return response.data;
@@ -74,12 +58,10 @@ const getEventIdsByType = async (accessToken, type, date) => {
     }
 }
 
-const loadEvent = async (accessToken, eventId) => {
+const loadEvent = async (eventId) => {
     try {
         const response = await axios.get(`${baseURL}/loadEvent`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
+            withCredentials: true,
             params: { id: eventId },
         });
         return response.data;
