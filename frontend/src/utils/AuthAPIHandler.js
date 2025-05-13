@@ -1,24 +1,30 @@
 import axios from 'axios';
 
-const baseURL = 'https://localhost:5000/api/auth';
+const baseURL = 'http://localhost:5000/api/auth';
 
 const register = async (userData) => {
     try {
         const response = await axios.post(`${baseURL}/register`, userData);
-        return response.data;
+        return response;
     } catch (error) {
-        console.error('Error registering user:', error);
-        throw error;
+        if (error.response && error.response.status === 401) {
+            alert('Invalid username or password');
+        } else {
+            alert('An error occurred during login');
+        }
     }
 }
 
 const login = async (credentials) => {
     try {
-        const response = await axios.post(`${baseURL}/login`, credentials);
-        return response.data;
+        const response = await axios.post(`${baseURL}`, credentials);
+        return response;
     } catch (error) {
-        console.error('Error logging in user:', error);
-        throw error;
+        if (error.response && error.response.status === 401) {
+            alert('Invalid username or password');
+        } else {
+            alert('An error occurred during login');
+        }
     }
 }
 
@@ -29,9 +35,9 @@ const logout = () => {
 const deleteAccount = async (credentials) => {
     try {
         const response = await axios.delete(`${baseURL}/delete`, { data: credentials });
-        return response.data;
+        return response;
     } catch (error) {
-        console.error('Error deleting account:', error);
+        alert(error.response || 'An error occurred during registration');
         throw error;
     }
 }
