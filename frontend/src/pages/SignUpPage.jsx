@@ -13,15 +13,11 @@ export function SignUpPage() {
             email,
             password,
         }
-        const response = await register(userData);
-        if (response.status === 201) {
-            setUsername('');
-            setEmail('');
-            setPassword('');
-            window.location.href = '/';
-        } else {
-            alert("Something went wrong when signing up");
-        }
+        await register(userData);
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        window.location.href = '/';
     }
 
     return (

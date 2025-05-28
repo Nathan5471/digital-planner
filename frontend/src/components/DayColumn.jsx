@@ -4,7 +4,7 @@ import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 import { ShowEvent } from './ShowEvent.jsx';
 import { DayEventPopup } from './DayEventPopup.jsx';
-import { getEventIdsByDate } from '../utils/EventHandler.jsx';
+import { getEventIdsByDate } from '../utils/EventAPIHandler.js';
 
 export function DayColumn({ date }) {
     const { refreshToggle } = useRefreshContext();

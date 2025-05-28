@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { getEventIdsByType } from '../../utils/EventHandler.jsx';
+import { getEventIdsByType } from '../../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
 import { ShowEventSmall } from './ShowEventSmall.jsx';
 

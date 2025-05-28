@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loadEvent, updateEvent } from '../utils/EventHandler.jsx';
+import { loadEvent, updateEvent } from '../utils/EventAPIHandler.js';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx'
 
 export function EditPopup({ eventId, triggerRefresh }) {

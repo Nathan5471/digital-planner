@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
-import { getEventIdsByDate } from '../utils/EventHandler.jsx';
+import { getEventIdsByDate } from '../utils/EventAPIHandler.js';
 import { ShowEventLong } from './ShowEventLong';
 
 export function DayEventPopup({ date }) {

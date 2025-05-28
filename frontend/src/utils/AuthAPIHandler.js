@@ -1,11 +1,17 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:5000/api/auth';
+const baseURL = 'https://6328-184-170-66-25.ngrok-free.app/api/auth';
+const api = axios.create({
+    baseURL: baseURL,
+    withCredentials: true,
+});
 
 const register = async (userData) => {
     try {
-        const response = await axios.post(`${baseURL}/register`, userData);
-        return response;
+        const response = await api.post('/register', userData);
+        if (response.status === 201) {
+            return response.data;
+        }
     } catch (error) {
         if (error.response && error.response.status === 401) {
             alert('Invalid username or password');
@@ -17,8 +23,10 @@ const register = async (userData) => {
 
 const login = async (credentials) => {
     try {
-        const response = await axios.post(`${baseURL}`, credentials);
-        return response;
+        const response = await api.post('/', credentials);
+        if (response.status === 200) {
+            return response.data;
+        }
     } catch (error) {
         if (error.response && error.response.status === 401) {
             alert('Invalid username or password');
@@ -35,7 +43,9 @@ const logout = () => {
 const deleteAccount = async (credentials) => {
     try {
         const response = await axios.delete(`${baseURL}/delete`, { data: credentials });
-        return response;
+        if (response.status === 200) {
+            return response.data;
+        }
     } catch (error) {
         alert(error.response || 'An error occurred during registration');
         throw error;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { parseISO, format } from 'date-fns';
-import { loadEvent } from '../utils/EventHandler.jsx';
+import { loadEvent } from '../utils/EventAPIHandler.js';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 
 export function ShowEventFull({ eventId }) {

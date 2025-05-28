@@ -11,14 +11,11 @@ export function LoginPage() {
             username,
             password,
         }
-        const response = await login(userData);
-        if (response.status === 200) {
-            setUsername('');
-            setPassword('');
-            window.location.href = '/';
-        } else {
-            alert("Something went wrong when logging in");
-        }
+        await login(userData);
+        setUsername('');
+        setPassword('');
+        alert('Login successful! Redirecting to home page...');
+        window.location.href = '/';
     }
     return (
         <form className="flex flex-col items-center justify-center min-h-screen bg-gray-100">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { loadEvent, deleteEvent } from '../utils/EventHandler.jsx';
+import { loadEvent, deleteEvent } from '../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 import { EditPopup } from './EditPopup.jsx';
