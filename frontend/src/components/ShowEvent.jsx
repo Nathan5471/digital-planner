@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { loadEvent, deleteEvent } from '../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
@@ -10,12 +10,9 @@ import editImage from '../assets/edit.svg';
 
 
 export function ShowEvent({ eventId, isToday, isPast }) {
-    const event = loadEvent(eventId);
-    let eventTitle = event.title;
-    if (eventTitle.length > 8) {
-        eventTitle = eventTitle.substring(0, 8) + "...";
-    }
-    const eventType = event.type;
+    const [loading, setLoading] = useState(true);
+    const [event, setEvent] = useState(null);
+    const [eventTitle, setEventTitle] = useState('');
     const colors = {
         'Homework': 'bg-blue-100 text-blue-800',
         'Project': 'bg-green-100 text-green-800',
@@ -25,6 +22,21 @@ export function ShowEvent({ eventId, isToday, isPast }) {
     }
     const { triggerRefresh} = useRefreshContext();
     const { openOverlay } = useOverlayContext();
+
+    useEffect(() => {
+        const fetchEvent = async () => {
+            try {
+                const eventData = await loadEvent(eventId);
+                setEvent(eventData);
+                setEventTitle(eventData.title);
+            } catch (error) {
+                console.error("Error loading event:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchEvent();
+    }, [eventId]);
 
     const deleteSelf = () => {
         deleteEvent(eventId);
@@ -39,26 +51,32 @@ export function ShowEvent({ eventId, isToday, isPast }) {
         openOverlay(<ShowEventFull eventId={eventId}/>);
     }
     return (
-        <div className={`border p-3 rounded-lg shadow-md ${isToday ? "bg-blue-100" : "bg-white"} ${isPast ? "line-through" : ""} mt-2`}>
-            <div className="flex justify-between items-center mb-2">
+        loading === true ? (
+            <div className="flex justify-center items-center h-32">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        ) : (
+            <div className={`border p-3 rounded-lg shadow-md ${isToday ? "bg-blue-100" : "bg-white"} ${isPast ? "line-through" : ""} mt-2`}>
+                <div className="flex justify-between items-center mb-2">
 
-                <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
-                
+                    <h4 className="text-sm font-semibold max-w-25">{eventTitle}</h4>
+                    
+                </div>
+                <div className={`border p-1 rounded-sm shadow-sm ${colors[event.type]}`}>
+                    <p className="text-xs">{event.type}</p>
+                </div>   
+                <div className="flex p-1 justify-end">
+                    <button className="text-xs border  rounded-sm shadow-sm transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none mr-2" onClick={showSelf}>
+                        Details
+                    </button>
+                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={editSelf}>
+                        <img src={editImage} width="20" height="20" alt="Edit Button"/>
+                    </button>
+                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={deleteSelf}>
+                        <img src={deleteImage} width="20" height="20" alt="Delete Button"/>
+                    </button>
+                </div>
             </div>
-            <div className={`border p-1 rounded-sm shadow-sm ${colors[eventType]}`}>
-                <p className="text-xs">{eventType}</p>
-            </div>   
-            <div className="flex p-1 justify-end">
-                <button className="text-xs border  rounded-sm shadow-sm transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none mr-2" onClick={showSelf}>
-                    Details
-                </button>
-                <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={editSelf}>
-                    <img src={editImage} width="20" height="20" alt="Edit Button"/>
-                </button>
-                <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={deleteSelf}>
-                    <img src={deleteImage} width="20" height="20" alt="Delete Button"/>
-                </button>
-            </div>
-        </div>
+        )
     );
 }

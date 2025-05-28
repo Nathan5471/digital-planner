@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { getEventIdsByType } from '../../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
@@ -6,11 +6,34 @@ import { ShowEventSmall } from './ShowEventSmall.jsx';
 
 export function UpcomingTests() {
     const { refreshToggle } = useRefreshContext();
+    const [tests, setTests] = useState([]);
+    const [loading, setLoading] = useState(true);   
     const refresh = refreshToggle
     
-    const tests = getEventIdsByType("Test", format(new Date(), 'yyyy-MM-dd'));
-    if (tests.length > 4) {
-        tests.length = 4;
+    useEffect(() => {
+        const fetchTests = async () => {
+            try {
+                const testIds = await getEventIdsByType('Test', format(new Date(), 'yyyy-MM-dd'));
+                if (testIds.length > 3) {
+                    testIds.length = 3;
+                }
+                setTests(testIds);
+            } catch (error) {
+                console.error("Error fetching tests:", error);
+                return [];
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchTests();
+    }, [refresh]);
+
+    if (loading === true) {
+        return (
+            <div className="border p-4 rounded-lg shadow-md bg-gray-100">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        );
     }
 
     if (tests.length === 0) {

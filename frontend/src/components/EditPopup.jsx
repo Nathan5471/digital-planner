@@ -15,7 +15,14 @@ export function EditPopup({ eventId, triggerRefresh }) {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        updateEvent(eventId, eventTitle, eventDescription, eventType, eventDate);
+        const eventData = {
+            id: eventId,
+            title: eventTitle,
+            description: eventDescription,
+            type: eventType,
+            date: eventDate
+        }
+        updateEvent(eventData);
         triggerRefresh();
         closeOverlay();
     }

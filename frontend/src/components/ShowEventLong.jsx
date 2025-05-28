@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { loadEvent, deleteEvent } from '../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
@@ -10,7 +10,8 @@ export function ShowEventLong({ eventId }) {
     const { triggerRefresh} = useRefreshContext();
     const { openOverlay } = useOverlayContext();
 
-    const event = loadEvent(eventId);
+    const [loading, setLoading] = useState(true);
+    const [event, setEvent] = useState(null);
     const colors = {
         'Homework': 'bg-blue-100 text-blue-800',
         'Project': 'bg-green-100 text-green-800',
@@ -18,6 +19,20 @@ export function ShowEventLong({ eventId }) {
         'Test': 'bg-red-100 text-red-800',
         'No School': 'bg-gray-100 text-gray-800'
     }
+
+    useEffect(() => {
+        const fetchEvent = async () => {
+            try {
+                const eventData = await loadEvent(eventId);
+                setEvent(eventData);
+            } catch (error) {
+                console.error("Error loading event:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchEvent();
+    }, [eventId]);
 
     const deleteSelf = () => {
         deleteEvent(eventId);
@@ -29,22 +44,28 @@ export function ShowEventLong({ eventId }) {
     }
 
     return (
-        <div className="border p-3 rounded-lg shadow-md mb-2">
-            <div className="flex justify-between">
-                <h4 className="text-lg font-semibold">{event.title}</h4>
-                <div className={`border p-1 rounded-sm shadow-sm ${colors[event.type]}`}>
-                    <p className="text-xs">{event.type}</p>
+        loading === true ? (
+            <div className="flex justify-center items-center h-32">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        ) : (
+            <div className="border p-3 rounded-lg shadow-md mb-2">
+                <div className="flex justify-between">
+                    <h4 className="text-lg font-semibold">{event.title}</h4>
+                    <div className={`border p-1 rounded-sm shadow-sm ${colors[event.type]}`}>
+                        <p className="text-xs">{event.type}</p>
+                    </div>
+                </div>
+                <p className="text-sm">{event.description}</p>
+                <div className="flex p-1 justify-end">
+                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={editSelf}>
+                        <img src={editImage} width="20" height="20" alt="Edit Button"/>
+                    </button>
+                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={deleteSelf}>
+                        <img src={deleteImage} width="20" height="20" alt="Delete Button"/>
+                    </button>
                 </div>
             </div>
-            <p className="text-sm">{event.description}</p>
-            <div className="flex p-1 justify-end">
-                <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={editSelf}>
-                    <img src={editImage} width="20" height="20" alt="Edit Button"/>
-                </button>
-                <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={deleteSelf}>
-                    <img src={deleteImage} width="20" height="20" alt="Delete Button"/>
-                </button>
-            </div>
-        </div>
+        )
     )
 }

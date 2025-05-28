@@ -13,7 +13,13 @@ export function AddEvent() {
     const { closeOverlay } = useOverlayContext();
 
     const addEventFunction = () => {
-        addEvent(eventTitle, eventDescription, eventType, eventDate);
+        const eventData = {
+            title: eventTitle,
+            description: eventDescription,
+            type: eventType,
+            date: eventDate
+        }
+        addEvent(eventData);
         setEventTitle('');
         setEventDescription('');
         setEventType('');

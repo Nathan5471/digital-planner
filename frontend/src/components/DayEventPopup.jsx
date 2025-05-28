@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
@@ -9,8 +9,19 @@ export function DayEventPopup({ date }) {
     const { triggerRefresh } = useRefreshContext();
     const { closeOverlay } = useOverlayContext();
     const refresh = triggerRefresh;
+    const [events, setEvents] = useState(null);
 
-    const events = getEventIdsByDate(format(date, 'yyyy-MM-dd'));
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const eventIds = await getEventIdsByDate(format(date, 'yyyy-MM-dd'));
+                setEvents(eventIds);
+            } catch (error) {
+                console.error("Error fetching events:", error);
+            }
+        }
+        fetchEvents();
+    }, [date, refresh]);
 
     const handleClose = () => {
         closeOverlay();
