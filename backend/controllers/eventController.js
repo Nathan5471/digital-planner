@@ -45,7 +45,7 @@ export const updateEvent = async (req, res) => {
 }
 
 export const deleteEvent = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
     const userId = req.userId;
     try {
         const event = await Event.findById(id);

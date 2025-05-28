@@ -43,7 +43,7 @@ const updateEvent = async (eventData) => {
 
 const deleteEvent = async (eventId) => {
     try {
-        const response = await api.delete('/', eventId);
+        const response = await api.delete('/', {params: { id: eventId }});
         if (response.status === 200) {
             return response.data;
         }

@@ -38,8 +38,8 @@ export function ShowEvent({ eventId, isToday, isPast }) {
         fetchEvent();
     }, [eventId]);
 
-    const deleteSelf = () => {
-        deleteEvent(eventId);
+    const deleteSelf = async () => {
+        await deleteEvent(eventId);
         triggerRefresh();
     }
 

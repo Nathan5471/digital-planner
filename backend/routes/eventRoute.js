@@ -29,7 +29,7 @@ router.put('/', authenticate, async (req, res) => {
 });
 
 router.delete('/', authenticate, async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
     try {
         if (!id) {
             return res.status(400).json({ message: 'Event ID is required' });
