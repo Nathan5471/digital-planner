@@ -5,10 +5,13 @@ import { MainView } from './pages/MainView.jsx'
 import { LoginPage } from './pages/LoginPage.jsx'
 import { SignUpPage } from './pages/SignUpPage.jsx'
 import { SettingsPage } from './pages/SettingsPage.jsx'
+import { useDarkMode } from './hooks/UseDarkMode.js'
 
 
 function App() {
+  const { isDarkMode } = useDarkMode()
   return (
+    <div className={isDarkMode ? 'dark' : 'light'}>
     <Router>
       <Routes>
         <Route path="/" element={<MainView />} />
@@ -17,6 +20,7 @@ function App() {
         <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     </Router>
+    </div>
   )
 }
 

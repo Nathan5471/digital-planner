@@ -18,19 +18,19 @@ export function LoginPage() {
         window.location.href = '/';
     }
     return (
-        <form className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <form className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800  dark:text-white">
             <h1 className="text-2xl font-bold mb-4">Login</h1>
             <input
                 type="text"
                 placeholder="Username"
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="mb-4 p-2 border dark:bg-gray-700 border-gray-300 dark:border-gray-700 rounded"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
             <input
                 type="password"
                 placeholder="Password"
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="mb-4 p-2 border dark:bg-gray-700 border-gray-300 dark:border-gray-700 rounded"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />

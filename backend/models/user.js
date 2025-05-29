@@ -15,6 +15,10 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
+    darkMode: {
+        type: Boolean,
+        default: true,
+    }
 })
 
 export const User = mongoose.model('User', userSchema);

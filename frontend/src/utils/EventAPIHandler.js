@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://8622-184-170-66-26.ngrok-free.app/api/events';
+const baseURL = 'https://6762-24-149-102-194.ngrok-free.app/api/events';
 const api = axios.create({
     baseURL: baseURL,
     withCredentials: true,

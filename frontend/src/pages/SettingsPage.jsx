@@ -21,13 +21,13 @@ export function SettingsPage() {
 
     return (
         loading === true ? (
-            <div className="flex justify-center items-center h-screen">
+            <div className="bg-gray-100 dark:bg-gray-700 flex justify-center items-center h-screen">
                 <p className="text-gray-500">Loading...</p>
             </div>
         ) : (
-            <div className="flex flex-col bg-gray-100 items-center justify-center min-h-screen">
-                <h1 className="text-2xl font-bold mb-4">Settings</h1>
-                <div className="bg-white p-6 rounded-lg shadow-md w-96">
+            <div className="flex flex-col bg-gray-100 dark:bg-gray-800 dark:text-white items-center justify-center min-h-screen">
+                <h1 className="text-4xl font-bold mt-2 mb-4">Settings</h1>
+                <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md w-96">
                     <h2 className="text-xl font-semibold mb-4">Account Settings</h2>
                     <hr></hr>
                     <div className="mt-4 flex flex-row justify-between items-center">
@@ -42,14 +42,14 @@ export function SettingsPage() {
                         <button className="w-full bg-blue-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none">Update Password</button>
                     </div>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-md w-96 mt-6">
+                <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md w-96 mt-6">
                     <h2 className="text-xl font-semibold mb-4">User Preferences</h2>
                     <hr></hr>
                     <div className="mt-4 w-full items-center">
                         <button className="w-full bg-blue-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none">Change Theme</button>
                     </div>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-md w-96 mt-6">
+                <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md w-96 mt-6 mb-6">
                     <h2 className="text-xl font-semibold mb-4">Account Management</h2>
                     <hr></hr>
                     <div className="mt-4 w-full items-center">

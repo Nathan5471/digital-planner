@@ -110,3 +110,32 @@ export const getCurrentUser = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 }
+
+export const getDarkModePreference = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select('darkMode');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({ darkMode: user.darkMode });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+export const setDarkModePreference = async (req, res) => {
+    try {
+        const { darkMode } = req.body;
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        user.darkMode = darkMode;
+        await user.save();
+        res.status(200).json({ message: 'Dark mode preference updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}

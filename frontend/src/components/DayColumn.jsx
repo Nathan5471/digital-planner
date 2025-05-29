@@ -42,11 +42,11 @@ export function DayColumn({ date }) {
     }
     return (
         loading === true ? (
-            <div className="border p-4 rounded-lg shadow-md w-36 h-99 bg-gray-100">
+            <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md w-36 h-99 bg-gray-100 dark:bg-gray-700">
                 <p className="text-gray-500">Loading...</p>
             </div>
         ) : (
-        <div className={`border p-4 rounded-lg shadow-md w-36 h-99 ${isToday ? "bg-blue-200" : "bg-white"}`}>
+        <div className={`border dark:border-gray-700 p-4 rounded-lg shadow-md w-36 h-99 ${isToday ? "bg-blue-200 dark:bg-blue-600/50" : "bg-white dark:bg-gray-700"}`}>
             <h3 className="text-xs font-bold items-center mb-1">{format(date, 'EEEE')} {format(date, 'MM/dd')}</h3>
             {events === null || events.length === 0 ? (
                 <p className="text-gray-500">No events</p>

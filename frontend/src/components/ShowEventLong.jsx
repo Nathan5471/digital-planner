@@ -49,7 +49,7 @@ export function ShowEventLong({ eventId }) {
                 <p className="text-gray-500">Loading...</p>
             </div>
         ) : (
-            <div className="border p-3 rounded-lg shadow-md mb-2">
+            <div className="border dark:border-gray-700 dark:bg-gray-700 p-3 rounded-lg shadow-md mb-2">
                 <div className="flex justify-between">
                     <h4 className="text-lg font-semibold">{event.title}</h4>
                     <div className={`border p-1 rounded-sm shadow-sm ${colors[event.type]}`}>
@@ -58,11 +58,11 @@ export function ShowEventLong({ eventId }) {
                 </div>
                 <p className="text-sm">{event.description}</p>
                 <div className="flex p-1 justify-end">
-                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={editSelf}>
-                        <img src={editImage} width="20" height="20" alt="Edit Button"/>
+                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-500 focus:outline-none" onClick={editSelf}>
+                        <img src={editImage} className="dark:invert" width="20" height="20" alt="Edit Button"/>
                     </button>
-                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 focus:outline-none" onClick={deleteSelf}>
-                        <img src={deleteImage} width="20" height="20" alt="Delete Button"/>
+                    <button className="text-xs transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-500 focus:outline-none" onClick={deleteSelf}>
+                        <img src={deleteImage} className="dark:invert" width="20" height="20" alt="Delete Button"/>
                     </button>
                 </div>
             </div>

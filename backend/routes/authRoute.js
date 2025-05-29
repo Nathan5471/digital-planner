@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, deleteUser, getCurrentUser } from '../controllers/authController.js';
+import { registerUser, loginUser, deleteUser, getCurrentUser, getDarkModePreference, setDarkModePreference } from '../controllers/authController.js';
 import authenticate from '../middleware/authenticate.js';
 
 const router = express.Router();
@@ -47,5 +47,25 @@ router.delete('/', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+router.get('/darkmode', authenticate, async (req, res) => {
+    try {
+        getDarkModePreference(req, res);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+})
+
+router.post('/darkmode', authenticate, async (req, res) => {
+    const { darkMode } = req.body;
+    try {
+        if (darkMode === undefined) {
+            return res.status(400).json({ message: 'Dark mode preference is required' });
+        }
+        setDarkModePreference(req, res);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+})
 
 export default router;

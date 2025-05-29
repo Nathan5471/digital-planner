@@ -30,7 +30,7 @@ export function UpcomingTests() {
 
     if (loading === true) {
         return (
-            <div className="border p-4 rounded-lg shadow-md bg-gray-100">
+            <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-gray-100 dark:bg-gray-700">
                 <p className="text-gray-500">Loading...</p>
             </div>
         );
@@ -38,7 +38,7 @@ export function UpcomingTests() {
 
     if (tests.length === 0) {
         return (
-            <div className="border p-4 rounded-lg shadow-md bg-white">
+            <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700">
                 <h3 className="text-pretty font-bold items-center">Upcoming Tests</h3>
                 <p className="text-gray-500">No upcoming tests</p>
             </div>
@@ -46,7 +46,7 @@ export function UpcomingTests() {
     }
 
     return (
-        <div className="border p-4 rounded-lg shadow-md bg-white">
+        <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700">
             <h3 className="text-pretty font-bold items-center">Upcoming Tests</h3>
             {tests.map((event) => (
                 <ShowEventSmall key={event} eventId={event} />
