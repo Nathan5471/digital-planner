@@ -76,10 +76,9 @@ const getUserDarkMode = async () => {
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
-            window.location.href = '/login';
+            throw new Error('You are not logged in!')
         } else {
-            alert('An error occurred while fetching user dark mode preference');
+            throw new Error('An error occurred while fetching user dark mode preference');
         }
     }
 }

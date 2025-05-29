@@ -12,6 +12,7 @@ export function useDarkMode() {
                 setIsDarkMode(response.darkMode);
             } catch (error) {
                 console.error("Error fetching dark mode preference:", error);
+                setIsDarkMode(true);
             }
         }
         fetchDarkModePreference();
