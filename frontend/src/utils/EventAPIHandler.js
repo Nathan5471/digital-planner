@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://6762-24-149-102-194.ngrok-free.app/api/events';
+const baseURL = 'https://qjlesn-ip-184-170-66-26.tunnelmole.net/api/events';
 const api = axios.create({
     baseURL: baseURL,
     withCredentials: true,
@@ -63,7 +63,7 @@ const deleteEvent = async (eventId) => {
 
 const getEventIdsByDate = async (date) => {
     try {
-        const response = await api.get('/idsByDate', {params: { date }, headers: { 'ngrok-skip-browser-warning': 'any' }});
+        const response = await api.get('/idsByDate', {params: { date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
         if (response.status === 200) {
             return response.data;
         }
@@ -81,7 +81,7 @@ const getEventIdsByDate = async (date) => {
 
 const getEventIdsByType = async (type, date) => {
     try {
-        const response = await api.get('/idsByType', {params: { type, date }, headers: { 'ngrok-skip-browser-warning': 'any' }});
+        const response = await api.get('/idsByType', {params: { type, date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
         if (response.status === 200) {
             return response.data;
         }
@@ -99,7 +99,7 @@ const getEventIdsByType = async (type, date) => {
 
 const loadEvent = async (eventId) => {
     try {
-        const response = await api.get(`${baseURL}/loadEvent`, {params: { id: eventId }, headers: { 'ngrok-skip-browser-warning': 'any' }});
+        const response = await api.get(`${baseURL}/loadEvent`, {params: { id: eventId }, headers: { 'X-Pinggy-No-Screen': 'any' }});
         if (response.status === 200) {
             return response.data;
         }

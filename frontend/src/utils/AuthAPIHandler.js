@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://6762-24-149-102-194.ngrok-free.app/api/auth';
+const baseURL = 'https://qjlesn-ip-184-170-66-26.tunnelmole.net/api/auth';
 const api = axios.create({
     baseURL: baseURL,
     withCredentials: true,
@@ -36,13 +36,31 @@ const login = async (credentials) => {
     }
 }
 
+const editUser = async (editOption, newData) => {
+    try {
+        const response = await api.put(`/${editOption}`, newData);
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+            alert('You are not logged in! (Redirecting you to login page)');
+            window.location.href = '/login';
+        } else if (error.response && error.response.status === 404) {
+            alert('User not found');
+        } else {
+            alert('An error occurred while editing the user');
+        }
+    }
+}
+
 const logout = () => {
     // Implement clearing of the authentication token
 }
 
 const getCurrentUser = async () => {
     try {
-        const response = await api.get('/', { headers: { 'ngrok-skip-browser-warning': 'any' } });
+        const response = await api.get('/', { headers: { 'X-Pinggy-No-Screen': 'any' } });
         if (response.status === 200) {
             return response.data;
         }
@@ -70,7 +88,7 @@ const deleteAccount = async (credentials) => {
 
 const getUserDarkMode = async () => {
     try {
-        const response = await api.get('/darkmode', { headers: { 'ngrok-skip-browser-warning': 'any' } });
+        const response = await api.get('/darkmode', { headers: { 'X-Pinggy-No-Screen': 'any' } });
         if (response.status === 200) {
             return response.data;
         }
@@ -85,7 +103,7 @@ const getUserDarkMode = async () => {
 
 const setUserDarkMode = async (darkMode) => {
     try {
-        const response = await api.post('/darkmode', { darkMode }, { headers: { 'ngrok-skip-browser-warning': 'any' } });
+        const response = await api.post('/darkmode', { darkMode });
         if (response.status === 200) {
             return response.data;
         }
@@ -99,4 +117,4 @@ const setUserDarkMode = async (darkMode) => {
     }
 }
 
-export { register, login, logout, getCurrentUser, deleteAccount, getUserDarkMode, setUserDarkMode };
+export { register, login, editUser, logout, getCurrentUser, deleteAccount, getUserDarkMode, setUserDarkMode };

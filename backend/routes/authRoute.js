@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, deleteUser, getCurrentUser, getDarkModePreference, setDarkModePreference } from '../controllers/authController.js';
+import { registerUser, loginUser, editUsername, editEmail, editPassword, deleteUser, getCurrentUser, getDarkModePreference, setDarkModePreference } from '../controllers/authController.js';
 import authenticate from '../middleware/authenticate.js';
 
 const router = express.Router();
@@ -34,7 +34,43 @@ router.get('/', authenticate, async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-})
+});
+
+router.put('/username', authenticate, async (req, res) => {
+    const { newUsername } = req.body;
+    try {
+        if (!newUsername) {
+            return res.status(400).json({ message: 'New username is required' });
+        }
+        editUsername(req, res);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+router.put('/email', authenticate, async (req, res) => {
+    const { newEmail } = req.body;
+    try {
+        if (!newEmail) {
+            return res.status(400).json({ message: 'New email is required' });
+        }
+        editEmail(req, res);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+router.put('/password', authenticate, async (req, res) => {
+    const { newPassword } = req.body;
+    try {
+        if (!newPassword) {
+            return res.status(400).json({ message: 'New password is required' });
+        }
+        editPassword(req, res);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 router.delete('/', async (req, res) => {
     const { username, password } = req.body;
@@ -54,7 +90,7 @@ router.get('/darkmode', authenticate, async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-})
+});
 
 router.post('/darkmode', authenticate, async (req, res) => {
     const { darkMode } = req.body;
@@ -66,6 +102,6 @@ router.post('/darkmode', authenticate, async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-})
+});
 
 export default router;

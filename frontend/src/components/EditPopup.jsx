@@ -47,7 +47,6 @@ export function EditPopup({ eventId, triggerRefresh }) {
                     <button type="button" className="bg-red-500 text-white p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-red-600 focus:outline-none" onClick={closeOverlay}>Cancel</button>
                 </div>
             </form>
-
         </>
     )
         

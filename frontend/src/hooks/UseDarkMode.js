@@ -21,8 +21,8 @@ export function useDarkMode() {
     const toggleDarkMode = async () => {
         try {
             const newDarkModePreference = !isDarkMode;
-            await setUserDarkMode(newDarkModePreference);
             setIsDarkMode(newDarkModePreference);
+            await setUserDarkMode(newDarkModePreference);
         } catch (error) {
             console.error("Error setting dark mode preference:", error);
         }
