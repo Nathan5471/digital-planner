@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://gaxfak-ip-184-170-66-25.tunnelmole.net/api/auth';
+const baseURL = 'https://digital-planner-backend.onrender.comapi/auth';
 const api = axios.create({
     baseURL: baseURL,
     withCredentials: true,
