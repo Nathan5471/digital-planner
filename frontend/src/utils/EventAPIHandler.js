@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://digital-planner-backend.onrender.comapi/events';
+const baseURL = 'https://digital-planner-backend.onrender.com/api/events';
 const api = axios.create({
     baseURL: baseURL,
     withCredentials: true,
