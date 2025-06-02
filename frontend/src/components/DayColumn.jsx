@@ -4,7 +4,7 @@ import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
 import { ShowEvent } from './ShowEvent.jsx';
 import { DayEventPopup } from './DayEventPopup.jsx';
-import { getEventIdsByDate } from '../utils/EventAPIHandler.js';
+import { getEventsByDate } from '../utils/EventAPIHandler.js';
 
 export function DayColumn({ date }) {
     const { refreshToggle } = useRefreshContext();
@@ -20,12 +20,12 @@ export function DayColumn({ date }) {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const eventIds = await getEventIdsByDate(format(date, 'yyyy-MM-dd'));
-                setEventCount(eventIds.length);
-                if (eventIds.length > 3) {
-                    eventIds.length = 3;
+                const events = await getEventsByDate(format(date, 'yyyy-MM-dd'));
+                setEventCount(events.length);
+                if (events.length > 3) {
+                    events.length = 3;
                 }
-                setEvents(eventIds);
+                setEvents(events);
             }
             catch (error) {
                 console.error("Error fetching events:", error);
@@ -52,7 +52,7 @@ export function DayColumn({ date }) {
                 <p className="text-gray-500">No events</p>
             ) : (
                 events.map((event) => (
-                <ShowEvent key={event} eventId={event} isToday={isToday} isPast={isPast}/>
+                <ShowEvent key={event._id} event={event} isToday={isToday} isPast={isPast}/>
                 ))
             )}
             {eventCount > 3 && (

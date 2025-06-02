@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { getEventIdsByType } from '../../utils/EventAPIHandler.js';
+import { getEventsByType } from '../../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
 import { ShowEventSmall } from './ShowEventSmall.jsx';
 
@@ -13,11 +13,11 @@ export function UpcomingQuizes() {
     useEffect(() => {
         const fetchQuizes = async () => {
             try {
-                const quizIds = await getEventIdsByType('Quiz', format(new Date(), 'yyyy-MM-dd'));
-                if (quizIds.length > 3) {
-                    quizIds.length = 3;
+                const quizes = await getEventsByType('Quiz', format(new Date(), 'yyyy-MM-dd'));
+                if (quizes.events.length > 3) {
+                    quizes.events.length = 3;
                 }
-                setQuizes(quizIds);
+                setQuizes(quizes.events);
             } catch (error) {
                 console.error("Error fetching quizes:", error);
                 return [];
@@ -49,7 +49,7 @@ export function UpcomingQuizes() {
         <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700">
             <h3 className="text-pretty font-bold items-center">Upcoming Quizes</h3>
             {quizes.map((event) => (
-                <ShowEventSmall key={event} eventId={event} />
+                <ShowEventSmall key={event._id} event={event} />
             ))}
         </div>
     )

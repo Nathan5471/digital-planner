@@ -1,5 +1,5 @@
 import express from 'express';
-import { addEvent, updateEvent, deleteEvent, getEventIdsByDate, getEventIdsByType, loadEvent} from '../controllers/eventController.js';
+import { addEvent, updateEvent, deleteEvent, getEventsByDate, getEventsByType, loadEvent} from '../controllers/eventController.js';
 import authenticate from '../middleware/authenticate.js';
 
 const router = express.Router();
@@ -40,25 +40,25 @@ router.delete('/', authenticate, async (req, res) => {
     }
 });
 
-router.get('/idsByDate', authenticate, async (req, res) => {
+router.get('/eventsByDate', authenticate, async (req, res) => {
     const { date } = req.query;
     try {
         if (!date) {
             return res.status(400).json({ message: 'Date is required' });
         }
-        getEventIdsByDate(req, res);
+        getEventsByDate(req, res);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 });
 
-router.get('/idsByType', authenticate, async (req, res) => {
+router.get('/eventsByType', authenticate, async (req, res) => {
     const { type, date } = req.query;
     try {
         if (!type || !date) {
             return res.status(400).json({ message: 'Type and date are required' });
         }
-        getEventIdsByType(req, res);
+        getEventsByType(req, res);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }

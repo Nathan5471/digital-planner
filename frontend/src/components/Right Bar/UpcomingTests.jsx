@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { getEventIdsByType } from '../../utils/EventAPIHandler.js';
+import { getEventsByType } from '../../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
 import { ShowEventSmall } from './ShowEventSmall.jsx';
 
@@ -13,11 +13,11 @@ export function UpcomingTests() {
     useEffect(() => {
         const fetchTests = async () => {
             try {
-                const testIds = await getEventIdsByType('Test', format(new Date(), 'yyyy-MM-dd'));
-                if (testIds.length > 3) {
-                    testIds.length = 3;
+                const tests = await getEventsByType('Test', format(new Date(), 'yyyy-MM-dd'));
+                if (tests.events.length > 3) {
+                    tests.events.length = 3;
                 }
-                setTests(testIds);
+                setTests(tests.events);
             } catch (error) {
                 console.error("Error fetching tests:", error);
                 return [];
@@ -49,7 +49,7 @@ export function UpcomingTests() {
         <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700">
             <h3 className="text-pretty font-bold items-center">Upcoming Tests</h3>
             {tests.map((event) => (
-                <ShowEventSmall key={event} eventId={event} />
+                <ShowEventSmall key={event._id} event={event} />
             ))}
         </div>
     )

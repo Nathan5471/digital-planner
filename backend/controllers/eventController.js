@@ -64,7 +64,7 @@ export const deleteEvent = async (req, res) => {
     }
 }
 
-export const getEventIdsByDate = async (req, res) => {
+export const getEventsByDate = async (req, res) => {
     const { date } = req.query;
     const userId = req.userId;
     try {
@@ -72,15 +72,14 @@ export const getEventIdsByDate = async (req, res) => {
         if (!events) {
             return res.status(404).json({ message: 'No events found' });
         }
-        const eventIds = events.map(event => event._id);
-        res.status(200).json(eventIds);
+        res.status(200).json(events);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
     }
 }
 
-export const getEventIdsByType = async (req, res) => {
+export const getEventsByType = async (req, res) => {
     // Get event IDs by type and on or after a specific date
     const { type, date, maxAmount } = req.query;
     const userId = req.userId;
@@ -93,8 +92,7 @@ export const getEventIdsByType = async (req, res) => {
         if (sortedEvents.length > maxAmount) {
             sortedEvents.length = maxAmount;
         }
-        const eventIds = sortedEvents.map(event => event._id);
-        res.status(200).json(eventIds);
+        res.status(200).json({events: sortedEvents});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://qjlesn-ip-184-170-66-26.tunnelmole.net/api/events';
+const baseURL = 'https://rrguqb-ip-24-149-102-194.tunnelmole.net/api/events';
 const api = axios.create({
     baseURL: baseURL,
     withCredentials: true,
@@ -61,9 +61,9 @@ const deleteEvent = async (eventId) => {
     }
 }
 
-const getEventIdsByDate = async (date) => {
+const getEventsByDate = async (date) => {
     try {
-        const response = await api.get('/idsByDate', {params: { date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
+        const response = await api.get('/eventsByDate', {params: { date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
         if (response.status === 200) {
             return response.data;
         }
@@ -79,9 +79,9 @@ const getEventIdsByDate = async (date) => {
     }
 }
 
-const getEventIdsByType = async (type, date) => {
+const getEventsByType = async (type, date) => {
     try {
-        const response = await api.get('/idsByType', {params: { type, date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
+        const response = await api.get('/eventsByType', {params: { type, date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
         if (response.status === 200) {
             return response.data;
         }
@@ -121,7 +121,7 @@ export {
     addEvent,
     updateEvent,
     deleteEvent,
-    getEventIdsByDate,
-    getEventIdsByType,
+    getEventsByDate,
+    getEventsByType,
     loadEvent,
 }

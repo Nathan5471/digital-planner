@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { useRefreshContext } from '../contexts/RefreshContext.jsx';
 import { useOverlayContext } from '../contexts/OverlayContext.jsx';
-import { getEventIdsByDate } from '../utils/EventAPIHandler.js';
+import { getEventsByDate } from '../utils/EventAPIHandler.js';
 import { ShowEventLong } from './ShowEventLong';
 
 export function DayEventPopup({ date }) {
@@ -14,8 +14,8 @@ export function DayEventPopup({ date }) {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const eventIds = await getEventIdsByDate(format(date, 'yyyy-MM-dd'));
-                setEvents(eventIds);
+                const events = await getEventsByDate(format(date, 'yyyy-MM-dd'));
+                setEvents(events);
             } catch (error) {
                 console.error("Error fetching events:", error);
             }
@@ -44,7 +44,7 @@ export function DayEventPopup({ date }) {
             </div>
             <div className="overflow-y-scroll max-h-96 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                 {events.map((event) => (
-                    <ShowEventLong key={event} eventId={event}/>
+                    <ShowEventLong key={event._id} event={event}/>
                 ))}
             </div>
         </>

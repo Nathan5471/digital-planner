@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { getEventIdsByType } from '../../utils/EventAPIHandler.js';
+import { getEventsByType } from '../../utils/EventAPIHandler.js';
 import { useRefreshContext } from '../../contexts/RefreshContext.jsx';
 import { ShowEventSmall } from './ShowEventSmall.jsx';
 
@@ -13,11 +13,11 @@ export function UpcomingProjects() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const projectIds = await getEventIdsByType('Project', format(new Date(), 'yyyy-MM-dd'));
-                if (projectIds.length > 3) {
-                    projectIds.length = 3;
+                const projects = await getEventsByType('Project', format(new Date(), 'yyyy-MM-dd'));
+                if (projects.events.length > 3) {
+                    projects.events.length = 3;
                 }
-                setProjects(projectIds);
+                setProjects(projects.events);
             } catch (error) {
                 console.error("Error fetching projects:", error);
                 return [];
@@ -49,7 +49,7 @@ export function UpcomingProjects() {
         <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700">
             <h3 className="text-pretty font-bold items-center">Upcoming Projects</h3>
             {projects.map((event) => (
-                <ShowEventSmall key={event} eventId={event} />
+                <ShowEventSmall key={event._id} event={event} />
             ))}
         </div>
     )
