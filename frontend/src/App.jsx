@@ -4,6 +4,7 @@ import './App.css'
 import { RefreshProvider } from './contexts/RefreshContext.jsx'
 import { OverlayProvider } from './contexts/OverlayContext.jsx'
 import { Overlay } from './components/Overlay.jsx'
+import { AuthenticatedRoute } from './utils/AuthenticatedRoute.jsx'
 import { MainView } from './pages/MainView.jsx'
 import { LoginPage } from './pages/LoginPage.jsx'
 import { SignUpPage } from './pages/SignUpPage.jsx'
@@ -19,10 +20,12 @@ function App() {
     <div className={isDarkMode ? 'dark' : 'light'}>
     <Router>
       <Routes>
-        <Route path="/" element={<MainView />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/settings" element={<SettingsPage toggleDarkMode={toggleDarkMode}/>} />
+        <Route element={<AuthenticatedRoute />}>
+          <Route path="/" element={<MainView />} />
+          <Route path="/settings" element={<SettingsPage toggleDarkMode={toggleDarkMode}/>} />
+        </Route>
       </Routes>
     </Router>
     <Overlay />

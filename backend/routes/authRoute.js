@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, editUsername, editEmail, editPassword, deleteUser, getCurrentUser, getDarkModePreference, setDarkModePreference } from '../controllers/authController.js';
+import { registerUser, loginUser, editUsername, editEmail, editPassword, logoutUser, deleteUser, getCurrentUser, getDarkModePreference, setDarkModePreference } from '../controllers/authController.js';
 import authenticate from '../middleware/authenticate.js';
 
 const router = express.Router();
@@ -72,12 +72,16 @@ router.put('/password', authenticate, async (req, res) => {
     }
 });
 
-router.delete('/', async (req, res) => {
-    const { username, password } = req.body;
+router.post('/logout', authenticate, async (req, res) => {
     try {
-        if (!username || !password) {
-            return res.status(400).json({ message: 'All fields are required' });
-        }
+        logoutUser(req, res);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+})
+
+router.delete('/', authenticate, async (req, res) => {
+    try {
         deleteUser(req, res);
     }  catch (error) {
         res.status(500).json({ message: 'Server error' });

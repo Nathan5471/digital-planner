@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getCurrentUser } from "../utils/AuthAPIHandler.js";
+import { getCurrentUser, logout } from "../utils/AuthAPIHandler.js";
 import { useOverlayContext } from "../contexts/OverlayContext.jsx";
 import { EditUsername } from "../components/SettingsEdit/EditUsername.jsx";
 import { EditEmail } from "../components/SettingsEdit/EditEmail.jsx";
 import { EditPassword } from "../components/SettingsEdit/EditPassword.jsx";
+import { DeleteUser } from "../components/SettingsEdit/DeleteUser.jsx";
 
 export function SettingsPage({ toggleDarkMode }) {
     const [user, setUser] = useState(null);
@@ -44,6 +45,22 @@ export function SettingsPage({ toggleDarkMode }) {
         toggleDarkMode();
     }
 
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            await logout()
+            window.location.href = '/login';
+        } catch (error) {
+            console.error("Error logging out:", error);
+            alert('An error occurred while logging out. Please try again later.');
+        }
+    }
+
+    const handleDeleteAccount = (e) => {
+        e.preventDefault();
+        openOverlay(<DeleteUser />);
+    }
+
     return (
         loading === true ? (
             <div className="bg-gray-100 dark:bg-gray-700 flex justify-center items-center h-screen">
@@ -78,10 +95,10 @@ export function SettingsPage({ toggleDarkMode }) {
                     <h2 className="text-xl font-semibold mb-4">Account Management</h2>
                     <hr></hr>
                     <div className="mt-4 w-full items-center">
-                        <button className="w-full bg-blue-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none">Log Out</button>
-                        </div>
+                        <button className="w-full bg-blue-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none" onClick={handleLogout}>Log Out</button>
+                    </div>
                     <div className="mt-4 w-full items-center">
-                        <button className="w-full bg-red-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-red-600 focus:outline-none">Delete Account</button>
+                        <button className="w-full bg-red-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-red-600 focus:outline-none" onClick={handleDeleteAccount}>Delete Account</button>
                     </div>
                 </div>
             </div>

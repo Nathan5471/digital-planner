@@ -64,6 +64,20 @@ export const deleteEvent = async (req, res) => {
     }
 }
 
+export const deleteUserEvents = async (userId) => {
+    try {
+        const result = await Event.deleteMany({ userId });
+        if (result.deletedCount === 0) {
+            console.log(`No events found for user ${userId}`);
+        } else {
+            console.log(`${result.deletedCount} events deleted for user ${userId}`);
+        }
+        
+    } catch (error) {
+        console.error('Error deleting user events:', error);
+    }
+}
+
 export const getEventsByDate = async (req, res) => {
     const { date } = req.query;
     const userId = req.userId;

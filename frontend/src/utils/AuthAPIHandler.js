@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://rrguqb-ip-24-149-102-194.tunnelmole.net/api/auth';
+const baseURL = 'https://gaxfak-ip-184-170-66-25.tunnelmole.net/api/auth';
 const api = axios.create({
     baseURL: baseURL,
     withCredentials: true,
@@ -54,8 +54,20 @@ const editUser = async (editOption, newData) => {
     }
 }
 
-const logout = () => {
-    // Implement clearing of the authentication token
+const logout = async () => {
+    try {
+        const response = await api.post('/logout');
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        console.error('Logout error:', error);
+        if (error.response && error.response.status === 401) {
+            alert('You are not logged in!');
+        } else {
+            alert('An error occurred during logout');
+        }
+    }
 }
 
 const getCurrentUser = async () => {
@@ -66,17 +78,16 @@ const getCurrentUser = async () => {
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
-            window.location.href = '/login';
+            throw new Error('You are not logged in!');
         } else {
             alert('An error occurred while fetching the current user');
         }
     }
 }
 
-const deleteAccount = async (credentials) => {
+const deleteAccount = async () => {
     try {
-        const response = await axios.delete(`${baseURL}/delete`, { data: credentials });
+        const response = await api.delete('/');
         if (response.status === 200) {
             return response.data;
         }
