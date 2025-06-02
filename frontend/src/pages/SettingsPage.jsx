@@ -61,6 +61,11 @@ export function SettingsPage({ toggleDarkMode }) {
         openOverlay(<DeleteUser />);
     }
 
+    const handleReturnHome = (e) => {
+        e.preventDefault();
+        window.location.href = '/';
+    }
+
     return (
         loading === true ? (
             <div className="bg-gray-100 dark:bg-gray-700 flex justify-center items-center h-screen">
@@ -101,6 +106,7 @@ export function SettingsPage({ toggleDarkMode }) {
                         <button className="w-full bg-red-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-red-600 focus:outline-none" onClick={handleDeleteAccount}>Delete Account</button>
                     </div>
                 </div>
+                <button className="w-96 mb-6 bg-blue-500 text-white text-lg p-2 rounded transform transition duration-200 ease-in-out hover:scale-105 hover:bg-blue-600 focus:outline-none" onClick={handleReturnHome}>Return Home</button>
             </div>
         )
     )

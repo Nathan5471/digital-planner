@@ -30,7 +30,7 @@ export function UpcomingProjects() {
 
     if (loading === true) {
         return (
-            <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-gray-100 dark:bg-gray-700">
+            <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-gray-100 dark:bg-gray-700 mt-2">
                 <p className="text-gray-500">Loading...</p>
             </div>
         );
@@ -38,7 +38,7 @@ export function UpcomingProjects() {
 
     if (projects.length === 0) {
         return (
-            <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700">
+            <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700 mt-2">
                 <h3 className="text-pretty font-bold items-center">Upcoming Projects</h3>
                 <p className="text-gray-500">No upcoming projects</p>
             </div>
@@ -46,7 +46,7 @@ export function UpcomingProjects() {
     }
 
     return (
-        <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700">
+        <div className="border dark:border-gray-700 p-4 rounded-lg shadow-md bg-white dark:bg-gray-700 mt-2">
             <h3 className="text-pretty font-bold items-center">Upcoming Projects</h3>
             {projects.map((event) => (
                 <ShowEventSmall key={event._id} event={event} />

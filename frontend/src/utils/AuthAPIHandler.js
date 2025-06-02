@@ -72,7 +72,7 @@ const logout = async () => {
 
 const getCurrentUser = async () => {
     try {
-        const response = await api.get('/', { headers: { 'X-Pinggy-No-Screen': 'any' } });
+        const response = await api.get('/');
         if (response.status === 200) {
             return response.data;
         }
@@ -99,7 +99,7 @@ const deleteAccount = async () => {
 
 const getUserDarkMode = async () => {
     try {
-        const response = await api.get('/darkmode', { headers: { 'X-Pinggy-No-Screen': 'any' } });
+        const response = await api.get('/darkmode');
         if (response.status === 200) {
             return response.data;
         }

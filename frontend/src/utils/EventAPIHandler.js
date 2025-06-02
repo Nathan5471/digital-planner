@@ -14,7 +14,6 @@ const addEvent = async (eventData) => {
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
             window.location.href = '/login';
         } else {
             alert('An error occurred while adding the event');}
@@ -29,7 +28,6 @@ const updateEvent = async (eventData) => {
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
             window.location.href = '/login';
         } else if (error.response && error.response.status === 403) {
             alert('You are not authorized to update this event');
@@ -49,7 +47,6 @@ const deleteEvent = async (eventId) => {
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
             window.location.href = '/login';
         } else if (error.response && error.response.status === 403) {
             alert('You are not authorized to delete this event');
@@ -63,13 +60,12 @@ const deleteEvent = async (eventId) => {
 
 const getEventsByDate = async (date) => {
     try {
-        const response = await api.get('/eventsByDate', {params: { date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
+        const response = await api.get('/eventsByDate', {params: { date }});
         if (response.status === 200) {
             return response.data;
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
             window.location.href = '/login';
         } else if (error.response && error.response.status === 404) {
             return [];
@@ -81,13 +77,12 @@ const getEventsByDate = async (date) => {
 
 const getEventsByType = async (type, date) => {
     try {
-        const response = await api.get('/eventsByType', {params: { type, date }, headers: { 'X-Pinggy-No-Screen': 'any' }});
+        const response = await api.get('/eventsByType', {params: { type, date }});
         if (response.status === 200) {
             return response.data;
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
             window.location.href = '/login';
         } else if (error.response && error.response.status === 404) {
             return [];
@@ -99,13 +94,12 @@ const getEventsByType = async (type, date) => {
 
 const loadEvent = async (eventId) => {
     try {
-        const response = await api.get(`${baseURL}/loadEvent`, {params: { id: eventId }, headers: { 'X-Pinggy-No-Screen': 'any' }});
+        const response = await api.get(`${baseURL}/loadEvent`, {params: { id: eventId }});
         if (response.status === 200) {
             return response.data;
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert('You are not logged in! (Redirecting you to login page)');
             window.location.href = '/login';
         } else if (error.response && error.response.status === 403) {
             alert('You are not authorized to load this event');
