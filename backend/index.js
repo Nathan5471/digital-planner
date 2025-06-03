@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: 'https://digital-planner.onrender.com/', credentials: true, methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
+app.use(cors({ origin: 'https://digitalplanner.nathanc.me/', credentials: true, methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/api/auth', authRoute);
