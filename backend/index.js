@@ -11,7 +11,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: 'https://digitalplanner.nathanc.me/', credentials: true, methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
+app.use(cors({ origin: 'https://digitalplanner.nathanc.me', credentials: true, methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
+app.options('/api', (req, res) => {
+    res.header('Access-Control-Allow-Origins', 'https://digitalplanner.nathanc.me');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.sendStatus(200);
+});
 app.use(express.json());
 app.use(cookieParser());
 app.use('/api/auth', authRoute);
